@@ -59,7 +59,7 @@
                 <ul class="flex space-x-8 text-sm font-sans">
                     <li>
                         <a
-                            href="#"
+                            @click="home"
                             class="active border-b-2 text-white font-semibold border-white pb-1"
                             >Accueil</a
                         >
@@ -69,15 +69,15 @@
                     <div class="flex">
                         <li>
                             <a
-                                href="#"
-                                class="text-md ml-2 border hover:bg-blue-500 px-3 py-2 rounded text-white font-bold"
+                                @click="login"
+                                class="text-md ml-2 border hover:bg-blue-500 px-3 py-2 rounded text-white font-bold cursor-pointer"
                                 >Log In</a
                             >
                         </li>
                         <li>
                             <a
-                                href="#"
-                                class="text-md ml-2 bg-white text-blue-500 hover:bg-blue-100 px-3 py-2 rounded font-bold"
+                                @click="signup"
+                                class="text-md ml-2 bg-white text-blue-500 hover:bg-blue-100 px-3 py-2 rounded font-bold cursor-pointer"
                                 >Sign Up</a
                             >
                         </li>
@@ -260,6 +260,15 @@ export default {
         drawer() {
             this.isOpen = !this.isOpen;
         },
+        home() {
+            this.$router.push("/")
+        },
+        login() {
+            this.$router.push("login")
+        },
+        signup() {
+            this.$router.push("signup")
+        }
     },
     watch: {
         isOpen: {
