@@ -1,19 +1,20 @@
 
 <template>
     <Nav />
-    <div class="flex justify-center mt-24">
-        <!-- <h1 class="text-2xl font-bold text-gray-700">Vue 3 App</h1> -->
-    </div>
+    <Home />
+    
 </template>
 
 
 <script>
-import Nav from './components/Nav'
+    import Nav from './components/Nav'
+    import Home from './components/Home/Home.vue'
 
-export default {
-    name: 'App',
-    components: {
-        Nav,
+    export default {
+        name: 'App',
+        components: {
+            Nav,
+            Home,
+        }
     }
-}
 </script>
