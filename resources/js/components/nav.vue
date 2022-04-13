@@ -7,7 +7,7 @@
             </div>
 
             <!-- search input -->
-            <div class="relative mx-auto text-gray-600 ">
+            <div class="relative mx-auto text-gray-600">
                 <input
                     class="border-2 border-gray-300 bg-white lg:w-72 h-10 pl-2 pr-8 rounded-lg text-sm focus:outline-none"
                     type="search"
@@ -35,7 +35,6 @@
                 </button>
             </div>
 
-
             <!-- Mobile toggle -->
             <div class="md:hidden mx-3">
                 <button @click="drawer">
@@ -52,33 +51,38 @@
                     </svg>
                 </button>
             </div>
-            
 
             <!-- Navbar -->
             <div class="hidden md:block">
                 <ul class="flex space-x-8 text-sm font-sans">
-                    <li>
-                        <a
-                            @click="home"
+                    <li >
+                        <router-link
+                            to="/"
                             class="active border-b-2 text-white font-semibold border-white pb-1"
-                            >Accueil</a
+                            >Accueil</router-link
                         >
                     </li>
-                    <li><a href="#" class="text-white font-semibold hover:border-b-2 border-white pb-1">Poster</a></li>
+                    <li>
+                        <router-link
+                            to="/poster"
+                            class="text-white font-semibold hover:border-b-2 border-white pb-1"
+                            >Poster</router-link
+                        >
+                    </li>
 
                     <div class="flex">
-                        <li>
-                            <a
-                                @click="login"
+                        <li >
+                            <router-link
+                                to="/login"
                                 class="text-md ml-2 border hover:bg-blue-500 px-3 py-2 rounded text-white font-bold cursor-pointer"
-                                >Log In</a
+                                >Log In</router-link
                             >
                         </li>
-                        <li>
-                            <a
-                                @click="signup"
+                        <li >
+                            <router-link
+                                :to="{ name: 'Register' }"
                                 class="text-md ml-2 bg-white text-blue-500 hover:bg-blue-100 px-3 py-2 rounded font-bold cursor-pointer"
-                                >Sign Up</a
+                                >Sign Up</router-link
                             >
                         </li>
                     </div>
@@ -135,7 +139,7 @@
                     <li class="my-5 mb-10">
                         <img src="../../img/horizontal_logo.png" alt="" />
                     </li>
-                    <li class="border-b-2 rounded-t-md hover:bg-blue-500 ">
+                    <li class="border-b-2 rounded-t-md hover:bg-blue-500">
                         <a
                             href="#"
                             @click="isOpen = false"
@@ -143,7 +147,7 @@
                             >Accueil</a
                         >
                     </li>
-                    <li class=" rounded-b-md hover:bg-blue-500">
+                    <li class="rounded-b-md hover:bg-blue-500">
                         <a
                             href="#"
                             @click="isOpen = false"
@@ -260,15 +264,16 @@ export default {
         drawer() {
             this.isOpen = !this.isOpen;
         },
-        home() {
-            this.$router.push("/")
-        },
-        login() {
-            this.$router.push("login")
-        },
-        signup() {
-            this.$router.push("signup")
-        }
+        // home() {
+        //     this.$router.push('/')
+        // },
+        // login() {
+        //     this.$router.push('/login')
+        // },
+        // register() {
+        //     this.$router.push('/register')
+        // }
+
     },
     watch: {
         isOpen: {
