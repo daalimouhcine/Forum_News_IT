@@ -1,0 +1,2 @@
+Hi my name is Mouhcine Daali and I am a student at Youcode, I am currently in my first year of this formation as a Full Stack Developer.
+I love coding and I am very passionate about it and I am always trying to improve my skills.
