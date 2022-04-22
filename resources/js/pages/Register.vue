@@ -13,7 +13,7 @@
                         {{ error }}
                     </div>
                     <div class="m-7">
-                        <form action="">
+                        <form action="" @submit.prevent="register">
                             <div class="flex gap-x-5">
                                 <div class="mb-6">
                                     <label
@@ -22,7 +22,7 @@
                                         >First Name
                                     </label>
                                     <input
-                                        @v-model="first_name"
+                                        v-model="first_name"
                                         type="text"
                                         name="first_name"
                                         id="first_name"
@@ -39,7 +39,8 @@
                                         >Last Name
                                     </label>
                                     <input
-                                        @v-model="last_name"
+                                        v-model="last_name"
+                                        
                                         type="text"
                                         name="last_name"
                                         id="last_name"
@@ -57,7 +58,7 @@
                                     >Email Address</label
                                 >
                                 <input
-                                    @v-model="email"
+                                    v-model="email"
                                     type="email"
                                     name="email"
                                     id="email"
@@ -69,12 +70,12 @@
 
                             <div class="mb-6">
                                 <label
-                                    @v-model="password"
                                     for="password"
                                     class="text-sm text-gray-600"
                                     >Password</label
                                 >
                                 <input
+                                    v-model="password"
                                     type="password"
                                     name="password"
                                     id="password"
@@ -85,7 +86,6 @@
                             </div>
                             <div class="mb-6">
                                 <button
-                                    @click="handleSubmit"
                                     type="submit"
                                     class="w-full px-3 py-4 text-white bg-indigo-500 rounded-md focus:bg-indigo-600 focus:outline-none"
                                 >
@@ -109,6 +109,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: "Register",
     date() {
@@ -117,35 +119,26 @@ export default {
             last_name: '',
             email: '',
             password: '',
-            role: 'user',
-            error: null
+            error: ''
         }
     },
     methods: {
-        handleSubmit(e) {
-            e.preventDefault()
-            if(this.password.length > 0) {
-                axios.get('/sanctum/csrf-cookie').then(response => {
-                    axios.post('api/register', {
-                        first_name: this.first_name,
-                        last_name: this.last_name,
-                        email: this.email,
-                        password: this.password,
-                        role: this.role
-                    })
-                    .then(response => {
-                        if (response.data.success) {
-                            window.location.href = "/login"
-                        } else {
-                            this.error = response.data.message
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-                })
-            }
+        register() {
+            axios.post('http://127.0.0.1:8000/api/register', {
+                first_name: this.first_name,
+                last_name: this.last_name,
+                email: this.email,
+                password: this.password
+            }).then(response => {
+                if(response.data === true) {
+                    console.log(response);
+                } else {
+                    console.log(response);
+                }
+            })
+            
         }
+
     },
     beforeRouteEnter (to, from, next) {
         if (window.Laravel.isLoggedin) {
