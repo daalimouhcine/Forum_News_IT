@@ -14,16 +14,20 @@ class AuthController extends Controller
     protected function register(Request $request) {
         try {
             $user = new User();
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
-            $user->email = $request->email;
+            $user->first_name = trim($request->first_name);
+            $user->last_name = trim($request->last_name);
+            $user->email = trim($request->email);
             $user->password = Hash::make($request->password);
-            $user->role = "user";
             $result = $user->save();
-            echo json_encode($result);
+            echo json_encode(["done" => $result, "userData" => $request]);
 
         } catch (QueryException $e) {
-            echo json_encode(["errorMessage" => $e->getMessage()]);
+            if(str_contains($e, 'users_email_unique')) {
+                echo json_encode(["errorMessage" => 'email']);
+            } else {
+                echo json_encode(["errorMessage" => 'else']);
+
+            }
         }
     }
 
