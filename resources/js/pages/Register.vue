@@ -9,8 +9,8 @@
                             Sign up to create you account
                         </p>
                     </div>
-                    <div class="mx-5 font-semibold text-red-500" role="alert" v-if="error !== null">
-                        {{ error }}
+                    <div class="my-3 font-semibold text-center text-red-500" role="alert" v-if="error != ''">
+                        {{ error }} 
                     </div>
                     <div class="m-7">
                         <form action="" @submit.prevent="register">
@@ -113,11 +113,13 @@ import axios from 'axios';
 
 export default {
     name: "Register",
-    date() {
+    data() {
         return {
             first_name: '',
             last_name: '',
             email: '',
+
+    
             password: '',
             error: ''
         }
@@ -130,10 +132,10 @@ export default {
                 email: this.email,
                 password: this.password
             }).then(response => {
-                if(response.data === true) {
-                    console.log(response);
+                if(response.data.done){
+                    this.$router.push('/login');
                 } else {
-                    console.log(response);
+                    this.error = response.data.errorMessage;
                 }
             })
             
