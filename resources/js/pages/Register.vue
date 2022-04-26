@@ -118,8 +118,6 @@ export default {
             first_name: '',
             last_name: '',
             email: '',
-
-    
             password: '',
             error: ''
         }
@@ -138,15 +136,15 @@ export default {
                     this.error = response.data.errorMessage;
                 }
             })
-            
-        }
+        },
 
     },
     beforeRouteEnter (to, from, next) {
-        if (window.Laravel.isLoggedin) {
-            return next('/');
+        if(localStorage.getItem('userData')) {
+            next('/');
+        } else {
+            next();
         }
-        next();
-    }
+    },
 };
 </script>
