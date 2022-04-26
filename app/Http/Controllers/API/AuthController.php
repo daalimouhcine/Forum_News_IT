@@ -23,7 +23,7 @@ class AuthController extends Controller
 
             } else {
                 $result = $user->save();
-                echo json_encode(["done" => $result, "userData" => $user]);
+                echo json_encode(["done" => $result]);
             }
 
         } catch (QueryException $e) {
@@ -45,6 +45,8 @@ class AuthController extends Controller
                 } else {
                     echo json_encode(["errorMessage" => "password is incorrect"]);
                 }
+            } else {
+                echo json_encode(["errorMessage" => "email is incorrect"]);
             }
         } catch(QueryException $e) {
             echo json_encode(["errorMessage" => "some thing went wrong pleas try again"]);
