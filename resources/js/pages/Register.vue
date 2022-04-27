@@ -141,10 +141,9 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         if(localStorage.getItem('userData')) {
-            next('/');
-        } else {
-            next();
+            return next('/');
         }
+        next();
     },
 };
 </script>
