@@ -95,7 +95,7 @@ export default {
                 password: this.password
             }).then(response => {
                 if(response.data.done) {
-                    localStorage.setItem('userData', JSON.stringify(response.data.user));
+                    localStorage.setItem('userData', JSON.stringify(response.data.userData));
                     this.$router.go('/');
                 } else {
                     this.error = response.data.errorMessage;
@@ -106,10 +106,9 @@ export default {
     },
     beforeRouteEnter(to, from, next) {
         if(localStorage.getItem('userData')) {
-            next('/');
-        } else {
-            next();
-        }
+            return next('/');
+        } 
+        next();
     },
 };
 </script>
