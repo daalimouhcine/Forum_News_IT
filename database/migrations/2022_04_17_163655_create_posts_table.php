@@ -18,7 +18,6 @@ return new class extends Migration
             // add a foreign key to the users table
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('created_by');
             $table->string('title');
             $table->text('body');
             $table->string('image')->nullable();
