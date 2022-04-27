@@ -4,6 +4,13 @@ export default {
     name: "Home",
     data() {
         return {
+            addPost: {
+                user_id: '',
+                title: '',
+                body: '',
+                image_path: '',
+                created_at: ''
+            },
             post_data: [
                 {
                     created_by: "Mouhcine Daali",
@@ -25,6 +32,11 @@ export default {
                 },
             ],
         };
+    },
+    methods: {
+        addPost() {
+
+        },
     },
     components: {
         Post,
@@ -70,32 +82,31 @@ export default {
                     <div class="modal">
                         <form class="flex flex-col ">
                             <div class="user-box">
-                                <input type="text" name="" required="" />
+                                <input type="text" name="" required />
                                 <label>Title</label>
                             </div>
                             <div class="user-box">
-                                <textarea name="" id="" required=""></textarea>
+                                <textarea name="" id="" required ></textarea>
                                 <label>Text Body</label>
                             </div>
                             <div class="user-box">
-                                <input type="image" src="" alt="" required="" />
-                                <label>Image</label>
+                                <input type="file" required />
                             </div>
                             <div class="user-box">
-                                <select name="" id="">
+                                <select required>
                                     <option>Select a domaine</option>
                                     <option value="tech">Tech</option>
                                     <option value="medical">Medical</option>
                                     <option value="exempt1">Exempt1</option>
                                 </select>
                             </div>
-                            <a href="#" class="w-fit self-center">
+                            <button type="submit" href="#" class="w-fit self-center" >
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 <span></span>
                                 Submit
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>
