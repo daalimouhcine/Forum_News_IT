@@ -1,10 +1,66 @@
+<script>
+export default {
+    data() {
+        return {
+            userData: {
+                first_name: '',
+                last_name: '',
+                email: '',
+            },
+            isOpen: false,
+            isLoggedIn: false,
+        };
+    },
+    methods: {
+        drawer() {
+            this.isOpen = !this.isOpen;
+        },
+        checkIfLoggedIn() {
+            if(localStorage.getItem('userData')) {
+                this.isLoggedIn = true;
+                this.userData = JSON.parse(localStorage.getItem('userData'));
+            } else {
+                this.isLoggedIn = false;
+            }
+           
+        },
+        logout() {
+            localStorage.removeItem('userData');
+            this.$router.go('/');
+        }
+
+    },
+    watch: {
+        isOpen: {
+            immediate: true,
+            handler(isOpen) {
+                if (process.client) {
+                    if (isOpen)
+                        document.body.style.setProperty("overflow", "hidden");
+                    else document.body.style.removeProperty("overflow");
+                }
+            },
+        },
+    },
+    mounted() {
+        document.addEventListener("keydown", (e) => {
+            if (e.keyCode == 27 && this.isOpen) this.isOpen = false;
+        });
+        this.checkIfLoggedIn();
+ 
+    },
+};
+</script>
+
+
+
 <template>
     <nav class="w-full px-6 py-3 bg-indigo-500">
         <div class="flex items-center justify-between">
             <!-- Header logo -->
-            <div class="mx-3">
+            <router-linke to="/" class="mx-3 cursor-pointer">
                 <img src="../../img/horizontal_logo.png" alt="" />
-            </div>
+            </router-linke>
 
             <!-- search input -->
             <div class="relative mx-auto text-gray-600">
@@ -54,23 +110,15 @@
 
             <!-- Navbar -->
             <div class="hidden md:block">
-                <ul class="flex space-x-8 text-sm font-sans">
-                    <li >
+                <ul class="flex items-center space-x-8 text-sm font-sans">
+                    <li class=" ">
                         <router-link
                             to="/"
                             class="active border-b-2 text-white font-semibold border-white pb-1"
                             >Accueil</router-link
                         >
                     </li>
-                    <li>
-                        <router-link
-                            to="/posts/add"
-                            class="text-white font-semibold hover:border-b-2 border-white pb-1"
-                            >Poster</router-link
-                        >
-                    </li>
-
-                    <div class="flex">
+                    <div class="flex" v-if="!isLoggedIn">
                         <li >
                             <router-link
                                 to="/login"
@@ -86,6 +134,30 @@
                             >
                         </li>
                     </div>
+
+                    <div class="dropdown cursor-pointer p-1 mr-2 flex items-center" v-else>                       
+                        <div class="">
+                            <img class="h-10 w-10 rounded-full" src="https://thispersondoesnotexist.com/image" alt="avatar">
+                        </div>
+                        <div class="">
+                            <span class="text-white text-sm font-light ml-1">{{userData.first_name + ' ' + userData.last_name}}</span>                              
+                        </div>
+                        <div class="rounded-md shadow-sm flex">                               
+                            <button class="flex justify-center items-center block h-3 w-3 overflow-hidden focus:outline-none"> 
+                                <div id="Seta" class="h-5 animate-ping inline-flex rounded-full text-gray-700 opacity-75">
+                                    
+                                    <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button> 
+                            <ul class="dropdown-menu absolute w-48 bg-white rounded-lg shadow-xl mt-7 -ml-40 hidden sm:mr-24 md:mr-32 lg:mr-48 xl:mr-64s">
+                                <li class=""><a class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" href="#">Profile</a></li>
+                                <li class=""><b class="rounded-b text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" @click="logout" href="#">Log Out</b></li>
+                            </ul>
+                                                            
+                        </div> 
+                    </div> 
                 </ul>
             </div>
 
@@ -147,33 +219,49 @@
                             >Accueil</router-link
                         >
                     </li>
-                    <li class="rounded-b-md hover:bg-indigo-500">
-                        <router-link
-                            to="/posts/add"
-                            @click="isOpen = false"
-                            class="block h-full w-full mb-4 py-4 text-white"
-                            >Poster</router-link
-                        >
-                    </li>
-                    <li>
-                        <router-link
-                            to="/login"
-                            @click="isOpen = false"
-                            class="my-3 mt-8 w-full text-center font-semibold cta inline-block hover:bg-indigo-500 px-3 py-2 border rounded text-white"
-                            >Log In</router-link
-                        >
-                    </li>
-                    <li>
-                        <router-link
-                            to="/register"
-                            @click="isOpen = false"
-                            class="mb-7 w-full text-center font-semibold cta inline-block bg-white text-indigo-500 hover:bg-blue-100 px-3 py-2 rounded"
-                            >Sign Up</router-link
-                        >
-                    </li>
+                    <div v-if="!isLoggedIn">
+                        <li>
+                            <router-link
+                                to="/login"
+                                @click="isOpen = false"
+                                class="my-3 mt-8 w-full text-center font-semibold cta inline-block hover:bg-indigo-500 px-3 py-2 border rounded text-white"
+                                >Log In</router-link
+                            >
+                        </li>
+                        <li>
+                            <router-link
+                                to="/register"
+                                @click="isOpen = false"
+                                class="mb-7 w-full text-center font-semibold cta inline-block bg-white text-indigo-500 hover:bg-blue-100 px-3 py-2 rounded"
+                                >Sign Up</router-link
+                            >
+                        </li>
+                    </div>
+                    <div class="dropdown w-full cursor-pointer p-1 mr-2 mt-5 flex items-center justify-center" v-else>                       
+                        <div class="">
+                            <img class="h-10 w-10 rounded-full" src="https://thispersondoesnotexist.com/image" alt="avatar">
+                        </div>
+                        <div class="">
+                            <span class="text-white text-sm font-light ml-1">{{userData.first_name + ' ' + userData.last_name}}</span>                              
+                        </div>
+                        <div class="rounded-md shadow-sm flex">                               
+                            <button class="flex justify-center items-center block h-3 w-3 overflow-hidden focus:outline-none"> 
+                                <div id="Seta" class="h-5 animate-ping inline-flex rounded-full text-gray-700 opacity-75">
+                                    <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button> 
+                            <ul class="dropdown-menu absolute w-48 bg-white rounded-lg shadow-xl mt-7 -ml-36 hidden sm:mr-24 md:mr-32 lg:mr-48 xl:mr-64s">
+                                <li class=""><a class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" href="#">Profile</a></li>
+                                <li class=""><b class="rounded-b text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" @click="logout" href="#">Log Out</b></li>
+                            </ul>
+                                                            
+                        </div> 
+                    </div> 
                 </ul>
 
-                <div class="follow">
+                <div class="follow mt-40">
                     <p class="italic font-sans text-sm text-white">
                         follow us:
                     </p>
@@ -253,44 +341,13 @@
     </nav>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isOpen: false,
-        };
-    },
-    methods: {
-        drawer() {
-            this.isOpen = !this.isOpen;
-        },
-        // home() {
-        //     this.$router.push('/')
-        // },
-        // login() {
-        //     this.$router.push('/login')
-        // },
-        // register() {
-        //     this.$router.push('/register')
-        // }
 
-    },
-    watch: {
-        isOpen: {
-            immediate: true,
-            handler(isOpen) {
-                if (process.client) {
-                    if (isOpen)
-                        document.body.style.setProperty("overflow", "hidden");
-                    else document.body.style.removeProperty("overflow");
-                }
-            },
-        },
-    },
-    mounted() {
-        document.addEventListener("keydown", (e) => {
-            if (e.keyCode == 27 && this.isOpen) this.isOpen = false;
-        });
-    },
-};
-</script>
+
+
+
+<style>
+ .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+</style>
