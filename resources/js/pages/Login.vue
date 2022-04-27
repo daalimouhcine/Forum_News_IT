@@ -1,3 +1,41 @@
+<script>
+import axios from 'axios';
+
+export default {
+    name: "Login",
+    data() {
+        return {
+            email: "",
+            password: "",
+            error: '',
+        };
+    },
+    methods: {
+        handleLogin() {
+            axios.post("http://127.0.0.1:8000/api/login", {
+                email: this.email,
+                password: this.password
+            }).then(response => {
+                if(response.data.done) {
+                    localStorage.setItem('userData', JSON.stringify(response.data.userData));
+                    this.$router.go('/');
+                } else {
+                    this.error = response.data.errorMessage;
+                }
+            })
+            
+        },
+    },
+    beforeRouteEnter(to, from, next) {
+        if(localStorage.getItem('userData')) {
+            return next('/');
+        } 
+        next();
+    },
+};
+</script>
+
+
 <template>
     <div>
         <div class="flex items-center min-h-full bg-white">
@@ -75,40 +113,3 @@
         </div>
     </div>
 </template>
-
-<script>
-import axios from 'axios';
-
-export default {
-    name: "Login",
-    data() {
-        return {
-            email: "",
-            password: "",
-            error: '',
-        };
-    },
-    methods: {
-        handleLogin() {
-            axios.post("http://127.0.0.1:8000/api/login", {
-                email: this.email,
-                password: this.password
-            }).then(response => {
-                if(response.data.done) {
-                    localStorage.setItem('userData', JSON.stringify(response.data.userData));
-                    this.$router.go('/');
-                } else {
-                    this.error = response.data.errorMessage;
-                }
-            })
-            
-        },
-    },
-    beforeRouteEnter(to, from, next) {
-        if(localStorage.getItem('userData')) {
-            return next('/');
-        } 
-        next();
-    },
-};
-</script>
