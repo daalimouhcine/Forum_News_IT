@@ -147,15 +147,15 @@ input#button:checked ~ .modal {
 .modal .user-box textarea:valid ~ label {
     top: -20px;
     left: 0;
-    color: #03e9f4;
+    color: #6366f1;
     font-size: 12px;
 }
 
-.modal form a {
+.modal form button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
-    color: #03e9f4;
+    color: #6366f1;
     font-size: 16px;
     text-decoration: none;
     text-transform: uppercase;
@@ -165,25 +165,25 @@ input#button:checked ~ .modal {
     letter-spacing: 4px;
 }
 
-.modal a:hover {
-    background: #03e9f4;
+.modal button:hover {
+    background: #6366f1;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-        0 0 100px #03e9f4;
+    box-shadow: 0 0 5px #6366f1, 0 0 25px #6366f1, 0 0 50px #6366f1,
+        0 0 100px #6366f1;
 }
 
-.modal a span {
+.modal button span {
     position: absolute;
     display: block;
 }
 
-.modal a span:nth-child(1) {
+.modal button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #03e9f4);
+    background: linear-gradient(90deg, transparent, #6366f1);
     animation: btn-anim1 1s linear infinite;
 }
 
@@ -197,12 +197,12 @@ input#button:checked ~ .modal {
     }
 }
 
-.modal a span:nth-child(2) {
+.modal button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #03e9f4);
+    background: linear-gradient(180deg, transparent, #6366f1);
     animation: btn-anim2 1s linear infinite;
     animation-delay: 0.25s;
 }
@@ -217,12 +217,12 @@ input#button:checked ~ .modal {
     }
 }
 
-.modal a span:nth-child(3) {
+.modal button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
     height: 2px;
-    background: linear-gradient(270deg, transparent, #03e9f4);
+    background: linear-gradient(270deg, transparent, #6366f1);
     animation: btn-anim3 1s linear infinite;
     animation-delay: 0.5s;
 }
@@ -237,12 +237,12 @@ input#button:checked ~ .modal {
     }
 }
 
-.modal a span:nth-child(4) {
+.modal button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(360deg, transparent, #03e9f4);
+    background: linear-gradient(360deg, transparent, #6366f1);
     animation: btn-anim4 1s linear infinite;
     animation-delay: 0.75s;
 }
