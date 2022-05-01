@@ -4,11 +4,11 @@
         name: "AddPost",
         data() {
             return {
+                userId: JSON.parse(localStorage.getItem('userData')).id,
                 title: '',
                 body: '',
-                image_path: '',
+                image: null,
                 domaine: '',
-                user_id: JSON.parse(localStorage.getItem('userData')).id
             }
         },
         methods: {
@@ -16,21 +16,21 @@
                 this.image_path = e.target.files[0];
             },
             handleSubmit() {
-                const formData = new FormData();
-                formData.append('title', this.title);
-                formData.append('body', this.body);
-                formData.append('image_path', this.image_path);
-                formData.append('domaine', this.domaine);
-                formData.append('user_id', this.user_id);
-                axios.post('http://127.0.0.1:8000/api/addPost', formData)
-                .then(response => {
+                axios.post('http://127.0.0.1:8000/api/addPost', {
+                    userId: this.userId,
+                    title: this.title,
+                    body: this.body,
+                    image: this.image,
+                    domaine: this.domaine
+                }).then(response => { 
                     console.log(response);
                     this.title = '';
                     this.body = '';
-                    this.image_path = '';
+                    this.image = null;
                     this.domaine = '';
-                
-                })
+                }).catch(error => {
+                    console.log(error);
+                });
             }
         },
     }
@@ -47,7 +47,7 @@
             ></ion-icon>
         </label>
         <div class="modal">
-            <form class="flex flex-col" @submit.prevent="handleSubmit">
+            <form action="" class="flex flex-col" @submit.prevent="handleSubmit">
                 <div class="user-box">
                     <input type="text" name="" required v-model="title" />
                     <label>Title</label>
@@ -57,7 +57,7 @@
                     <label>Text Body</label>
                 </div>
                 <div class="user-box">
-                    <input @change="uploadImage" type="file" required accept=".png, .jpg, .jpeg" :maxFileSize="1048576000000" multiple />
+                    <input @change="uploadImage" type="file" accept=".png, .jpg, .jpeg" :maxFileSize="1048576000000" multiple />
                 </div>
                 <div class="user-box">
                     <select required v-model="domaine">
