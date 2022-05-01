@@ -8,7 +8,7 @@
                 body: '',
                 image_path: '',
                 domaine: '',
-                created_by: JSON.parse(localStorage.getItem('userData')).id
+                user_id: JSON.parse(localStorage.getItem('userData')).id
             }
         },
         methods: {
@@ -16,7 +16,21 @@
                 this.image_path = e.target.files[0];
             },
             handleSubmit() {
-                axios
+                const formData = new FormData();
+                formData.append('title', this.title);
+                formData.append('body', this.body);
+                formData.append('image_path', this.image_path);
+                formData.append('domaine', this.domaine);
+                formData.append('user_id', this.user_id);
+                axios.post('http://127.0.0.1:8000/api/addPost', formData)
+                .then(response => {
+                    console.log(response);
+                    this.title = '';
+                    this.body = '';
+                    this.image_path = '';
+                    this.domaine = '';
+                
+                })
             }
         },
     }
