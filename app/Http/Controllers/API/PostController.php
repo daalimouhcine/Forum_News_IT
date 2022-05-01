@@ -10,9 +10,10 @@ class PostController extends Controller
 {
     protected function addPost(Request $request) {
         $post = new Post();
-        $post->userId = $request->userId;
         $post->title = $request->title;
         $post->body = $request->body;
         $post->image_path = $request->image_path;
+        $post->domaine = $request->domaine;
+        $post->user_id = $request->user_id;
     }
 }
