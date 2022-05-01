@@ -1,5 +1,7 @@
 <script>
+import AddPost from '../components/AddPost.vue';
 import Post from "../components/Post.vue";
+
 export default {
     name: "Home",
     data() {
@@ -33,12 +35,8 @@ export default {
             ],
         };
     },
-    methods: {
-        addPost() {
-
-        },
-    },
     components: {
+        AddPost,
         Post,
     },
 };
@@ -71,45 +69,7 @@ export default {
 
         <div class="w-full flex justify-evenly">
             <div class="w-3/5 max-w-3xl">
-                <div class="flex bg-blue-100 p-3 rounded-md">
-                    <input id="button" type="checkbox" />
-                    <label for="button" id="label_button" class="ml-auto">
-                        <ion-icon
-                            name="add-outline"
-                            class="text-4xl border-2 border-gray-900 rounded-md text-gray-900 cursor-pointer"
-                        ></ion-icon>
-                    </label>
-                    <div class="modal">
-                        <form class="flex flex-col ">
-                            <div class="user-box">
-                                <input type="text" name="" required />
-                                <label>Title</label>
-                            </div>
-                            <div class="user-box">
-                                <textarea name="" id="" required ></textarea>
-                                <label>Text Body</label>
-                            </div>
-                            <div class="user-box">
-                                <input type="file" required />
-                            </div>
-                            <div class="user-box">
-                                <select required>
-                                    <option>Select a domaine</option>
-                                    <option value="tech">Tech</option>
-                                    <option value="medical">Medical</option>
-                                    <option value="exempt1">Exempt1</option>
-                                </select>
-                            </div>
-                            <button type="submit" href="#" class="w-fit self-center" >
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                                Submit
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                <AddPost />
                 <Post
                     :created_by="post_data[0].created_by"
                     :created_at="post_data[0].created_at"
