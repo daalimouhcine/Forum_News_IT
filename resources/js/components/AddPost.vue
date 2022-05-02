@@ -13,7 +13,13 @@
         },
         methods: {
             uploadImage(e) {
-                this.image_path = e.target.files[0];
+                this.image = e.target.files[0];
+            },
+            clearInputs() {
+                this.title = '';
+                this.body = '';
+                this.image = null;
+                this.domaine = '';
             },
             handleSubmit() {
                 axios.post('http://127.0.0.1:8000/api/addPost', {
@@ -23,11 +29,9 @@
                     image: this.image,
                     domaine: this.domaine
                 }).then(response => { 
+                    // this.$router.go('/');
                     console.log(response);
-                    this.title = '';
-                    this.body = '';
-                    this.image = null;
-                    this.domaine = '';
+                    console.log(this.image);
                 }).catch(error => {
                     console.log(error);
                 });
@@ -40,7 +44,7 @@
 <template>
     <div class="flex bg-blue-100 p-3 rounded-md">
         <input id="button" type="checkbox" />
-        <label for="button" id="label_button" class="ml-auto">
+        <label for="button" id="label_button" class="ml-auto" @click="clearInputs">
             <ion-icon
                 name="add-outline"
                 class="text-4xl border-2 border-gray-900 rounded-md text-gray-900 cursor-pointer"
