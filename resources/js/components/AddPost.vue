@@ -29,7 +29,7 @@
                     image: this.image,
                     domaine: this.domaine
                 }).then(response => { 
-                    // this.$router.go('/');
+                    this.$router.go('/');
                     console.log(response);
                     console.log(this.image);
                 }).catch(error => {
@@ -57,11 +57,11 @@
                     <label>Title</label>
                 </div>
                 <div class="user-box">
-                    <textarea name="" id="" required v-model="body" ></textarea>
+                    <textarea name="body" id="body" required v-model="body" ></textarea>
                     <label>Text Body</label>
                 </div>
                 <div class="user-box">
-                    <input @change="uploadImage" type="file" accept=".png, .jpg, .jpeg" :maxFileSize="1048576000000" multiple />
+                    <input @change="uploadImage" type="file" name="image" accept=".png, .jpg, .jpeg" :maxFileSize="1048576000000" multiple />
                 </div>
                 <div class="user-box">
                     <select required v-model="domaine">
