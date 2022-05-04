@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
+import Comment from '../components/Comment.vue';
 
 const postsData = async () => {
     return new Promise((resolve) => {
@@ -26,9 +27,15 @@ export default {
         }
     },
     methods: {
-        displayCommentCondition() {
+        displayCommentCondition(e) {
             this.displayComments = !this.displayComments;
+            let postDisplayComments = e.target.parentNode.parentNode.parentNode;
+            console.log(postDisplayComments);
+            postDisplayComments.classList.toggle('post-display-comments');
         },
+    },
+    components: {
+        Comment,
     },
         
   
@@ -61,7 +68,7 @@ export default {
         <div class="mt-3 w-full" v-if="post.image">
             <img class="h-[200px] w-full" :src="post.image" alt="">
         </div>
-        <div class=" mt-5 flex flex-row justify-between">
+        <div class="mt-5 flex flex-col justify-between">
             <div class="w-full flex flex-row items-center gap-3">
                 <div class="flex flex-row justify-evenly items-center">
                     <ion-icon class="text-2xl cursor-pointer p-2 m-0.5 rounded-full hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all" name="chevron-up-outline"></ion-icon>
@@ -78,6 +85,9 @@ export default {
                     <ion-icon class="text-xl" name="chevron-forward-outline"></ion-icon>
                 </div>
             </div>
+            <Comment />
         </div>
     </div>
 </template>
+
+
