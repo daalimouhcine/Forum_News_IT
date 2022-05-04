@@ -9,7 +9,7 @@ use App\Models\Post;
 
 class PostController extends Controller {
 
-    protected function index() {
+    protected function allPosts() {
         $posts = Post::all();
         return response()->json($posts);
     }
