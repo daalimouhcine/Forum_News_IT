@@ -8,6 +8,7 @@ Route::post("/register", [AuthController::class, 'register']);
 Route::post("/login", [AuthController::class, 'login']);
 
 Route::post("/addPost", [PostController::class, 'addPost']);
+Route::get("/allPosts", [PostController::class, 'allPosts']);
 
 
 // Route::group(['prefix' => 'posts', 'middleware' => 'auth:sanctum'], function () {
