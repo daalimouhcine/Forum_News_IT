@@ -22,7 +22,7 @@ class PostController extends Controller {
             $post->title = $request->title;
             $post->body = $request->body;
             $post->domaine = $request->domaine;
-        
+            
             // check if the image is uploaded and if it is, change the name of the image
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
