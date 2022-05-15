@@ -22,7 +22,7 @@ export default {
     },
     data() {
         return {
-            displayComments: false, 
+            displayComments: false,
 
         }
     },
@@ -85,7 +85,7 @@ export default {
                     <ion-icon class="text-xl" name="chevron-forward-outline"></ion-icon>
                 </div>
             </div>
-            <Comment />
+            <Comment :postId=post.id />
         </div>
     </div>
 </template>
