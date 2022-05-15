@@ -32,6 +32,7 @@
                     this.$router.go('/');
                     console.log(response);
                     console.log(this.image);
+                    
                 }).catch(error => {
                     console.log(error);
                 });
