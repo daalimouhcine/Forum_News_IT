@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use File;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -56,6 +57,14 @@ class PostController extends Controller
 
         return Redirect::back();
 
+    }
+
+    public function deletePost(Request $request) {
+        $post = Post::find($request->post_id);
+        Post::destroy($post->id);
+        $comment = Comment::where('post_id' , $request->post_id)->get();
+        Comment::destroy($comment->id);
+        return response()->json(['status' => 'deleted']);
     }
 
     /**
