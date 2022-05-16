@@ -1,15 +1,20 @@
 <?php
 
-use App\Http\Controllers\API\AuthController;
-use App\Http\Controllers\API\PostController;
-use App\Http\Controllers\API\CommentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::post("/register", [AuthController::class, 'register']);
-Route::post("/login", [AuthController::class, 'login']);
+Route::post("/register", [UserController::class, 'register']);
+Route::post("/login", [UserController::class, 'login']);
 
 Route::post("/addPost", [PostController::class, 'addPost']);
-Route::get("/allPosts", [PostController::class, 'allPosts']);
+Route::get("/posts", [PostController::class, 'index']);
+
+
+Route::get("/categories", [CategoryController::class, 'index']);
+
 
 Route::post("/addComment", [CommentController::class, 'addComment']);
 Route::get("/getComments/{postId}", [CommentController::class, 'getComments']);

@@ -8,13 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+    protected $fillable = ['first_name', 'last_name', 'email', 'password'];
 
-    protected $fillable = [
-        "first_name",
-        "last_name",
-        "email",
-        "password",
-        "role"
-    ];
-    
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
 }

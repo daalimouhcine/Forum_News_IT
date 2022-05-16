@@ -1,66 +1,131 @@
 <script>
-export default {
-    
-}
+export default {};
 </script>
 
 <template>
-  <div class="skeleton page">
-    <div class="skeleton-nav"></div>
-    <div class="skeleton-swiper"></div>
+    <div class="grid grid-cols-1 gap-6 mt-4 w-full">
+        <div
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+        >
+            <div class="flex items-center mt-5">
+                <div>
+                    <div class="rounded-full bg-gray-200 w-10 h-10"></div>
+                </div>
+                <div class="flex justify-between w-full ml-3">
+                    <div class="w-5/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="w-2/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1">
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+            </div>
+            <div class="animate-pulse flex flex-col">
+                <div class="flex flex-col mt-5">
+                    <div class="w-full h-5 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-10/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-8/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+                <div class="rounded w-full h-40 bg-gray-200 my-5"></div>
+                <div class="flex justify-between">
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                </div>
+            </div>
+        </div>
 
-    <div class="skeleton-banner"></div>
-  </div>
-  <div class="skeleton page">
-    <div class="skeleton-nav"></div>
-    <div class="skeleton-swiper"></div>
+        <div
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+        >
+            <div class="flex items-center mt-5">
+                <div>
+                    <div class="rounded-full bg-gray-200 w-10 h-10"></div>
+                </div>
+                <div class="flex justify-between w-full ml-3">
+                    <div class="w-5/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="w-2/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1">
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+            </div>
+            <div class="animate-pulse flex flex-col">
+                <div class="flex flex-col mt-5">
+                    <div class="w-full h-5 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-10/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-8/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+                <div class="rounded w-full h-40 bg-gray-200 my-5"></div>
+                <div class="flex justify-between">
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                </div>
+            </div>
+        </div>
 
-    <div class="skeleton-banner"></div>
-  </div>
+         <div
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+        >
+            <div class="flex items-center mt-5">
+                <div>
+                    <div class="rounded-full bg-gray-200 w-10 h-10"></div>
+                </div>
+                <div class="flex justify-between w-full ml-3">
+                    <div class="w-5/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="w-2/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1">
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+            </div>
+            <div class="animate-pulse flex flex-col">
+                <div class="flex flex-col mt-5">
+                    <div class="w-full h-5 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-10/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-8/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+                <div class="rounded w-full h-40 bg-gray-200 my-5"></div>
+                <div class="flex justify-between">
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                </div>
+            </div>
+        </div>
+
+         <div
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+        >
+            <div class="flex items-center mt-5">
+                <div>
+                    <div class="rounded-full bg-gray-200 w-10 h-10"></div>
+                </div>
+                <div class="flex justify-between w-full ml-3">
+                    <div class="w-5/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="w-2/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 mt-5 gap-x-2 gap-y-1">
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+                <div class="mt-2 w-full h-3 bg-gray-200 rounded"></div>
+            </div>
+            <div class="animate-pulse flex flex-col">
+                <div class="flex flex-col mt-5">
+                    <div class="w-full h-5 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-10/12 h-3 bg-gray-200 rounded"></div>
+                    <div class="mt-2 w-8/12 h-3 bg-gray-200 rounded"></div>
+                </div>
+                <div class="rounded w-full h-40 bg-gray-200 my-5"></div>
+                <div class="flex justify-between">
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                    <div class="rounded-sm bg-gray-200 w-20 h-5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
-
-<style scoped>
-.skeleton {
-  position: relative;
-  height: fit-content;
-  overflow: hidden;
-  padding: 15px;
-  box-sizing: border-box;
-  background: #fff;
-} 
-.skeleton-nav {
-  height: 45px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-swiper {
-  height: 260px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-tabs {
-  list-style: none;
-  padding: 0;
-  margin: 0 -15px;
-  display: flex;
-  flex-wrap: wrap;
-}
-.skeleton-tabs-item {
-  width: 25%;
-  height: 55px;
-  box-sizing: border-box;
-  text-align: center;
-  margin-bottom: 15px;
-}
-.skeleton-banner {
-  height: 60px;
-  background: #eee;
-  margin-bottom: 15px;
-}
-.skeleton-productions {
-  height: 20px;
-  margin-bottom: 15px;
-  background: #eee;
-}
-
-</style>

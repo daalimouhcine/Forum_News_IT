@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Vote extends Model
 {
     use HasFactory;
-    protected $fillable = ['body', 'user_id', 'post_id'];
+    protected $fillable = ['user_id', 'post_id', 'vote'];
 
     public function user()
     {
