@@ -11,6 +11,7 @@ Route::post("/login", [UserController::class, 'login']);
 
 Route::post("/addPost", [PostController::class, 'addPost']);
 Route::get("/posts", [PostController::class, 'index']);
+Route::post("/deletePost", [PostController::class, 'deletePost']);
 
 
 Route::get("/categories", [CategoryController::class, 'index']);
