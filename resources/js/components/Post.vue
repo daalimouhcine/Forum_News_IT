@@ -2,6 +2,7 @@
 import axios from "axios";
 import { ref } from "vue";
 import Comment from "../components/Comment.vue";
+import EditPost from "./EditPost.vue";
 
 const postsData = async () => {
     return new Promise((resolve) => {
@@ -23,14 +24,30 @@ export default {
     data() {
         return {
             displayComments: false,
+            displayOptions: false,
         };
     },
     methods: {
         displayCommentCondition(e) {
             this.displayComments = !this.displayComments;
             let postDisplayComments = e.target.parentNode.parentNode.parentNode;
-            console.log(postDisplayComments);
             postDisplayComments.classList.toggle("post-display-comments");
+        },
+        displayOptionsCondition(e) {
+            this.displayOptions = !this.displayOptions;
+            let postDisplayOptions = e.target.parentNode;
+            postDisplayOptions.classList.toggle("post-display-options");
+        },
+        editPost(post_id) {
+            
+        },
+        deletePost(post_id) {
+            console.log(post_id);
+            axios.post("/api/deletePost", post_id)
+            .then(response => {
+                console.log(response);
+                this.$router.go('/');
+            })
         },
     },
     components: {
@@ -78,11 +95,19 @@ export default {
                     </div>
                 </div>
             </div>
-                <div class="ml-auto cursor-pointer text-black">
+                <div class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
                     <ion-icon
                         class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
                         name="ellipsis-vertical-outline"
                     ></ion-icon>
+                    <div class="options flex absolute flex-col ">
+                        <button class="m-1 p-2 bg-green-400 rounded-md" @click="editPost(post.id)">
+                            edit
+                        </button>
+                        <button class="m-1 p-2 bg-red-400 rounded-md" @click="deletePost(post.id)">
+                            delete
+                        </button>
+                    </div>
                 </div>
         </div>
         <h2 class="text-3xl font-extrabold">
@@ -135,47 +160,19 @@ export default {
         </div>
     </article>
     <!-- End comments row -->
-
-    <!--           
-    <div class="w-full max-w-3xl bg-white font-[Poppins] py-7 px-9 my-2 shadow-md rounded-xl" v-for='post in posts' :key='post.id'>
-        <div class="w-full sm:flex hidden text-gray-400 text-base">
-            <div class="flex cursor-pointer items-center">
-                <div class="my-3">
-                    <img class="h-10 w-10 rounded-full" src="https://thispersondoesnotexist.com/image" alt="avatar">
-                </div>
-                <p class="ml-3">{{ post.user.first_name + ' ' + post.user.last_name }}</p>
-            </div>
-            <div class="ml-auto cursor-pointer text-black">
-                <ion-icon class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all" name="ellipsis-vertical-outline"></ion-icon>
-            </div>
-
-        </div>
-        <div class="flex flex-col">
-            <p class="text-gray-400 text-sm mb-3">{{ post.created_at }}</p>
-            <h1 class="font-bold sm:text-2xl text-base w-[80%]">{{ post.title }}</h1>
-        </div>
-        <p class=" text-gray-400 mt-4">{{ post.body }}</p>
-        <div class="mt-3 w-full" v-if="post.image">
-            <img class="h-[200px] w-full" :src="post.image" alt="">
-        </div>
-        <div class="mt-5 flex flex-col justify-between">
-            <div class="w-full flex flex-row items-center gap-3">
-                <div class="flex flex-row justify-evenly items-center">
-                    <ion-icon class="text-2xl cursor-pointer p-2 m-0.5 rounded-full hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all" name="chevron-up-outline"></ion-icon>
-                    <p class="text-2xl font-bold font-[Poppins]">{{ vote }}</p>
-                    <ion-icon class="text-2xl cursor-pointer p-2 m-0.5 rounded-full hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all" name="chevron-down-outline"></ion-icon>
-                </div>
-                <div class="flex flex-row cursor-pointer p-3 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"  @click="displayCommentCondition">
-                    <ion-icon class="text-2xl" name="chatbubbles-outline"></ion-icon>
-                    <p class="ml-2">Comments</p>
-                </div>
-                <div class="flex items-center justify-self-end gap-2 ml-auto">
-                    <ion-icon class="text-xl" name="chevron-back-outline"></ion-icon>
-                    <p>{{ post.category.name }}</p>
-                    <ion-icon class="text-xl" name="chevron-forward-outline"></ion-icon>
-                </div>
-            </div>
-            <Comment :postId="post.id" :comments="post.comments" />
-        </div>
-    </div> -->
 </template>
+<style scoped>
+.options {
+    right:-50%;
+    top:-70%;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 500ms ease-in-out;
+}
+.post-display-options .options {
+    opacity:1;
+    top:100%;
+    pointer-events: all;
+}
+
+</style>
