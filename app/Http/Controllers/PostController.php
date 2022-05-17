@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Carbon\Carbon;
@@ -23,6 +24,11 @@ class PostController extends Controller
         //
         Carbon::setLocale('fr');
         $posts = Post::orderBy("id", "asc")->with('user')->with('category')->with('comments')->with('votes')->get();
+        foreach ($posts as $post) {
+            foreach ($post->comments as $comment) {
+                $comment->setAttribute('user' , User::find($comment->user_id));
+            }
+        }
 
 
         return response()->json($posts);
@@ -60,11 +66,17 @@ class PostController extends Controller
     }
 
     public function deletePost(Request $request) {
-        $post = Post::find($request->post_id);
+
+        $post = Post::find($request->id);
         Post::destroy($post->id);
-        $comment = Comment::where('post_id' , $request->post_id)->get();
-        Comment::destroy($comment->id);
+
+        $comments = Comment::where('post_id' , $request->id)->get();
+        
+        foreach ($comments as $comment) {
+            Comment::destroy($comment->id);
+        }
         return response()->json(['status' => 'deleted']);
+
     }
 
     /**
