@@ -47,7 +47,7 @@ export default {
             >
                 <div class="relative w-full">
                     <input
-                        class="pt-2 pb-2 pl-3 w-full h-11 bg-slate-200 rounded-lg placeholder:text-slate-600 font-medium pr-20"
+                        class="pt-2 mt-2 pb-2 pl-3 w-full h-11 bg-slate-200 rounded-lg placeholder:text-slate-600 font-medium pr-20"
                         v-model="body"
                         type="text"
                         placeholder="Add Comment"
@@ -85,7 +85,7 @@ export default {
                         <a
                             class="inline-block text-base font-bold mr-2"
                             href="#"
-                            >{{ comment.user_id }}</a
+                            >{{ comment.user.first_name + " " + comment.user.last_name }}</a
                         >
                         <span class="text-slate-500 "
                             >{{ comment.created_at }}</span
