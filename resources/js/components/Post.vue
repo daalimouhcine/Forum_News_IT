@@ -41,9 +41,9 @@ export default {
         editPost(post_id) {
             
         },
-        deletePost(post_id) {
-            console.log(post_id);
-            axios.post("/api/deletePost", post_id)
+        deletePost(id) {
+            console.log(id);
+            axios.post("/api/deletePost", { id })
             .then(response => {
                 console.log(response);
                 this.$router.go('/');
