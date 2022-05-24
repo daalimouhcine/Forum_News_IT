@@ -23,6 +23,7 @@ export default {
     },
     data() {
         return {
+            settings: localStorage.getItem('userData') ? true : false,
             displayComments: false,
             displayOptions: false,
         };
@@ -95,7 +96,7 @@ export default {
                     </div>
                 </div>
             </div>
-                <div class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
+                <div v-if="settings" class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
                     <ion-icon
                         class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
                         name="ellipsis-vertical-outline"
