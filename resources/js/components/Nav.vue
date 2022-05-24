@@ -143,7 +143,7 @@ export default {
                             <span class="text-white text-sm font-light ml-1">{{userData.first_name + ' ' + userData.last_name}}</span>                              
                         </div>
                         <div class="rounded-md shadow-sm flex">                               
-                            <button class="flex justify-center items-center block h-3 w-3 overflow-hidden focus:outline-none"> 
+                            <button class="flex justify-center items-center h-3 w-3 overflow-hidden focus:outline-none"> 
                                 <div id="Seta" class="h-5 animate-ping inline-flex rounded-full text-gray-700 opacity-75">
                                     
                                     <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -245,7 +245,7 @@ export default {
                             <span class="text-white text-sm font-light ml-1">{{userData.first_name + ' ' + userData.last_name}}</span>                              
                         </div>
                         <div class="rounded-md shadow-sm flex">                               
-                            <button class="flex justify-center items-center block h-3 w-3 overflow-hidden focus:outline-none"> 
+                            <button class="flex justify-center items-center h-3 w-3 overflow-hidden focus:outline-none"> 
                                 <div id="Seta" class="h-5 animate-ping inline-flex rounded-full text-gray-700 opacity-75">
                                     <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
