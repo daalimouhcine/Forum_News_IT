@@ -7,7 +7,7 @@ export default {
     name: "Home",
     data() {
         return {
-
+            isUser: localStorage.getItem('userData') ? true : false,
         };
     },
     components: {
@@ -22,7 +22,7 @@ export default {
     <div class="flex flex-col">
         <div class="w-full flex justify-evenly">
             <div class="w-3/5 max-w-3xl">
-                <AddPost />
+                <AddPost v-if="isUser" />
 
                 <Suspense>
                     <template #default>

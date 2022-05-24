@@ -4,7 +4,7 @@
         name: "AddPost",
         data() {
             return {
-                user_id: JSON.parse(localStorage.getItem('userData')).id,
+                user_id: localStorage.getItem('userData') && JSON.parse(localStorage.getItem('userData')).id,
                 title: '',
                 body: '',
                 image: null,

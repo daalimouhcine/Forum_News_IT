@@ -4,7 +4,7 @@ import axios from "axios";
 export default {
     data() {
         return {
-            userId: JSON.parse(localStorage.getItem("userData")).id,
+            userId: localStorage.getItem('userData') && JSON.parse(localStorage.getItem("userData")).id,
             postId: this.postId,
             body: "",
             comments: this.comments,
