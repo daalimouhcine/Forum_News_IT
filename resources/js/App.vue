@@ -2,7 +2,7 @@
     <div class="w-full">
 
         <Nav />
-        <br/>
+        <br />
         <router-view/>
     </div>
 </template>
