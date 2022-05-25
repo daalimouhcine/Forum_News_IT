@@ -40,7 +40,12 @@ export default {
             postDisplayOptions.classList.toggle("post-display-options");
         },
         editPost(post_id) {
-            
+            this.$router.push({
+                name: "edit-post",
+                params: {
+                    post_id: post_id,
+                },
+            });
         },
         deletePost(id) {
             console.log(id);
@@ -49,6 +54,15 @@ export default {
                 console.log(response);
                 this.$router.go('/');
             })
+        },
+        sameUser(userPostId) {
+            let userData = JSON.parse(localStorage.getItem('userData'));
+            let userId = userData.id;
+            if (userId == userPostId) {
+                return true;
+            } else {
+                return false;
+            }
         },
     },
     components: {
@@ -96,14 +110,14 @@ export default {
                     </div>
                 </div>
             </div>
-                <div v-if="settings" class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
+                <div v-if="settings && sameUser(post.user.id)" class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
                     <ion-icon
                         class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
                         name="ellipsis-vertical-outline"
                     ></ion-icon>
                     <div class="options flex absolute flex-col ">
                         <button class="m-1 p-2 bg-green-400 rounded-md" @click="editPost(post.id)">
-                            edit
+                            edit 
                         </button>
                         <button class="m-1 p-2 bg-red-400 rounded-md" @click="deletePost(post.id)">
                             delete
