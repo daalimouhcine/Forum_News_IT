@@ -10,16 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 class CommentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -38,6 +28,15 @@ class CommentController extends Controller
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Error adding comment']);
         }
+    }
+
+
+    public function deleteComment(Request $request)
+    {
+        //
+                $commit = Comment::find($request->id);
+        Comment::destroy($commit->id);
+        return response()->json(['status' => 'deleted']);
     }
 
     /**
