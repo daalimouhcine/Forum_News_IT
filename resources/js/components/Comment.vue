@@ -22,13 +22,14 @@ export default {
                     this.$router.go('/');
                 });
         },
-        // getAllComments() {
-        //     axios.get('http://127.0.0.1:8000/api/allComments'+this.postId)
-        //     .then(response => {
-        //         this.comments = response.data;
-        //         console.log(this.comments);
-        //     })
-        // }
+        deleteComment(id) {
+            console.log(id);
+            axios.post("/api/deleteComment", { id })
+            .then(response => {
+                console.log(response);
+                this.$router.go('/');
+            })
+        },
     },
     props: ["postId", "comments"],
     // mounted() {
@@ -95,10 +96,15 @@ export default {
                         {{ comment.body }}
                     </p>
                     <div class="mt-2 flex items-center">
-                        <button
-                            class="py-2 px-4 font-medium hover:bg-slate-50 rounded-lg"
+                        <button v-if="comment.user_id == userId" @click="deleteComment(comment.id)"
+                            class="flex items-center justify-center text-red-500 hover:text-red-900"
                         >
-                            Repply
+                            <svg
+                                class="fill-current w-6 h-6"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
