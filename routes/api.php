@@ -19,12 +19,5 @@ Route::get("/categories", [CategoryController::class, 'index']);
 
 Route::post("/addComment", [CommentController::class, 'addComment']);
 Route::get("/getComments/{postId}", [CommentController::class, 'getComments']);
+Route::post("/deleteComment", [CommentController::class, 'deleteComment']);
 
-
-// Route::group(['prefix' => 'posts', 'middleware' => 'auth:sanctum'], function () {
-//     Route::get('/', [BookController::class, 'index']);
-//     Route::post('add', [BookController::class, 'add']);
-//     Route::get('edit/{id}', [BookController::class, 'edit']);
-//     Route::post('update/{id}', [BookController::class, 'update']);
-//     Route::delete('delete/{id}', [BookController::class, 'delete']);
-// });
