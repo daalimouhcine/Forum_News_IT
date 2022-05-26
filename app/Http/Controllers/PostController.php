@@ -79,6 +79,23 @@ class PostController extends Controller
 
     }
 
+    public function deletePostByUserId(Request $request) {
+
+        $posts = Post::where('userId', $request->id);
+        
+        foreach ($posts as $post) {
+            Post::destroy($post->id);
+        }
+
+        $comments = Comment::where('post_id' , $request->id)->get();
+        
+        foreach ($comments as $comment) {
+            Comment::destroy($comment->id);
+        }
+        return response()->json(['status' => 'deleted']);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
