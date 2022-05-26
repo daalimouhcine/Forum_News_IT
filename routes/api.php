@@ -10,6 +10,7 @@ Route::post("/register", [UserController::class, 'register']);
 Route::post("/login", [UserController::class, 'login']);
 Route::post("/updateProfile", [UserController::class, 'updateProfile']);
 Route::get("/users", [UserController::class, 'users']);
+Route::post("/deleteUser", [UserController::class, 'deleteUser']);
 
 
 Route::post("/addPost", [PostController::class, 'addPost']);
