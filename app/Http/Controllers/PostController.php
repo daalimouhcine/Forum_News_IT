@@ -79,20 +79,16 @@ class PostController extends Controller
 
     }
 
-    public function deletePostByUserId(Request $request) {
 
-        $posts = Post::where('userId', $request->id);
-        
-        foreach ($posts as $post) {
-            Post::destroy($post->id);
-        }
+    public function updatePost(Request $request) {
 
-        $comments = Comment::where('post_id' , $request->id)->get();
+        $post = Post::find($request->id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->category_id = $request->input('category_id');
+        $post->save();
         
-        foreach ($comments as $comment) {
-            Comment::destroy($comment->id);
-        }
-        return response()->json(['status' => 'deleted']);
+        return response()->json(['status' => 'updated']);
 
     }
 
