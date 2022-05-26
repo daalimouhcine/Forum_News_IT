@@ -9,6 +9,7 @@ export default {
             },
             isOpen: false,
             isLoggedIn: false,
+            role: JSON.parse(localStorage.getItem('userData')) && JSON.parse(localStorage.getItem('userData')).role,
         };
     },
     methods: {
@@ -152,7 +153,8 @@ export default {
                                 </div>
                             </button> 
                             <ul class="dropdown-menu absolute w-48 bg-white rounded-lg shadow-xl mt-7 -ml-40 hidden sm:mr-24 md:mr-32 lg:mr-48 xl:mr-64s">
-                                <li class=""><a class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" href="#">Profile</a></li>
+                                <li v-if="role == 'user'" class=""><router-link class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" to="/profile">Profile</router-link></li>
+                                <li v-else-if="role == 'admin'" class=""><router-link class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" to="/dashboard">Dashboard</router-link></li>
                                 <li class=""><b class="rounded-b text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" @click="logout" href="#">Log Out</b></li>
                             </ul>
                                                             
@@ -253,7 +255,7 @@ export default {
                                 </div>
                             </button> 
                             <ul class="dropdown-menu absolute w-48 bg-white rounded-lg shadow-xl mt-7 -ml-36 hidden sm:mr-24 md:mr-32 lg:mr-48 xl:mr-64s">
-                                <li class=""><a class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" href="#">Profile</a></li>
+                                <li class=""><router-link class="rounded-t text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" to="/profile">Profile</router-link></li>
                                 <li class=""><b class="rounded-b text-gray-800 hover:bg-gray-600 hover:text-white py-2 px-4 block whitespace-no-wrap" @click="logout" href="#">Log Out</b></li>
                             </ul>
                                                             
