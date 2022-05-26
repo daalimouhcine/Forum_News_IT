@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/register", [UserController::class, 'register']);
 Route::post("/login", [UserController::class, 'login']);
+Route::post("/updateProfile", [UserController::class, 'updateProfile']);
+Route::get("/users", [UserController::class, 'users']);
+
 
 Route::post("/addPost", [PostController::class, 'addPost']);
 Route::get("/posts", [PostController::class, 'index']);
