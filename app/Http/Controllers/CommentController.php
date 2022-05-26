@@ -34,7 +34,7 @@ class CommentController extends Controller
     public function deleteComment(Request $request)
     {
         //
-                $commit = Comment::find($request->id);
+        $commit = Comment::find($request->id);
         Comment::destroy($commit->id);
         return response()->json(['status' => 'deleted']);
     }
