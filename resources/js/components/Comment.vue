@@ -4,10 +4,16 @@ import axios from "axios";
 export default {
     data() {
         return {
-            userId: localStorage.getItem('userData') && JSON.parse(localStorage.getItem("userData")).id,
+            userId:
+                localStorage.getItem("userData") &&
+                JSON.parse(localStorage.getItem("userData")).id,
             postId: this.postId,
             body: "",
             comments: this.comments,
+            isAdmin:
+                JSON.parse(localStorage.getItem("userData")).role == "admin"
+                    ? true
+                    : false,
         };
     },
     methods: {
@@ -19,16 +25,15 @@ export default {
                     body: this.body,
                 })
                 .then((response) => {
-                    this.$router.go('/');
+                    this.$router.go("/");
                 });
         },
         deleteComment(id) {
             console.log(id);
-            axios.post("/api/deleteComment", { id })
-            .then(response => {
+            axios.post("/api/deleteComment", { id }).then((response) => {
                 console.log(response);
-                this.$router.go('/');
-            })
+                this.$router.go("/");
+            });
         },
     },
     props: ["postId", "comments"],
@@ -50,7 +55,7 @@ export default {
                         type="text"
                         placeholder="Add Comment"
                         required
-                        />
+                    />
                     <button
                         type="submit"
                         class="flex absolute right-3 top-2/4 -mt-3 items-center cursor-pointer"
@@ -83,24 +88,32 @@ export default {
                         <a
                             class="inline-block text-base font-bold mr-2"
                             href="#"
-                            >{{ comment.user.first_name + " " + comment.user.last_name }}</a
+                            >{{
+                                comment.user.first_name +
+                                " " +
+                                comment.user.last_name
+                            }}</a
                         >
-                        <span class="text-slate-500 "
-                            >{{ comment.created_at }}</span
-                        >
+                        <span class="text-slate-500">{{
+                            comment.created_at
+                        }}</span>
                     </div>
                     <p>
                         {{ comment.body }}
                     </p>
                     <div class="mt-2 flex items-center">
-                        <button v-if="comment.user_id == userId" @click="deleteComment(comment.id)"
+                        <button
+                            v-if="(comment.user_id == userId) || isAdmin"
+                            @click="deleteComment(comment.id)"
                             class="flex items-center justify-center text-red-500 hover:text-red-900"
                         >
                             <svg
                                 class="fill-current w-6 h-6"
                                 viewBox="0 0 24 24"
                             >
-                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                                ></path>
                             </svg>
                         </button>
                     </div>
