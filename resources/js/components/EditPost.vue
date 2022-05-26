@@ -1,49 +1,44 @@
 <script>
     import axios from 'axios';
+    
     export default {
-        name: "AddPost",
+        name: "EditPost",
         data() {
             return {
-                user_id: JSON.parse(localStorage.getItem('userData')).id,
-                title: '',
-                body: '',
+                postId: JSON.parse(JSON.stringify(this.postInfo.id)),
+                title: JSON.parse(JSON.stringify(this.postInfo.title)),
+                body: JSON.parse(JSON.stringify(this.postInfo.body)),
                 image: null,
-                category_id: '',
+                category_id: JSON.parse(JSON.stringify(this.postInfo.category_id)),
                 categories: [],
             }
         },
         methods: {
-            uploadImage(e) {
-                this.image = e.target.files[0];
-            },
-            clearInputs() {
-                this.title = '';
-                this.body = '';
-                this.image = null;
-                this.category_id = '';
-            },
             handleSubmit() {
-                axios.post('/api/addPost', {
-                    user_id: this.user_id,
+                axios.post('/api/updatePost', {
+                    id: this.postId,
                     title: this.title,
                     body: this.body,
                     image: this.image,
                     category_id: this.category_id
                 }).then(response => { 
+                    console.log(response);
                     this.$router.go('/');
-                    console.log(this.image);
-                    
-                }).catch(error => {
-                    console.log(error);
-                });
+                                        
+                })
             },
             getCategories() {
-                console.log('hello');
                 axios.get('/api/categories')
                 .then(response => {
                     this.categories = response.data;
                 });
             }
+        },
+        props: {
+            postInfo: {
+                type: Object,
+                required: true,
+            },
         },
         mounted() {
             this.getCategories();
@@ -53,14 +48,8 @@
 
 
 <template>
-    <div class="flex bg-blue-100 p-3 rounded-md">
-        <input id="button" type="checkbox" />
-        <label for="button" id="label_button" class="ml-auto" @click="clearInputs">
-            <ion-icon
-                name="add-outline"
-                class="text-4xl border-2 border-gray-900 rounded-md text-gray-900 cursor-pointer"
-            ></ion-icon>
-        </label>
+    <div class="flex p-3 rounded-md">
+        <input id="button" type="checkbox" checked={{this.status}} />
         <div class="modal">
             <form action="" class="flex flex-col" @submit.prevent="handleSubmit">
                 <div class="user-box">
