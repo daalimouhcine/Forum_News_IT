@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Comment;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
@@ -79,6 +81,24 @@ class UserController extends Controller
     public function users() {
         $users = User::where('role', 'user')->get();
         return response()->json([$users]);
+    }
+
+
+    public function deleteUser(Request $request) {
+        $user = User::where('id', $request->userId)->first();
+        // delete the posts of this user
+        $posts = Post::where('user_id', $request->userId)->get();
+        foreach ($posts as $post) {
+            Post::destroy($post->id);
+        }
+        // delete the comments of this user
+        $comments = Comment::where('user_id', $request->userId)->get();
+        foreach ($comments as $comment) {
+            Comment::destroy($comment->id);
+        }
+        // delete the user
+        User::destroy($user->id);
+        return response()->json(["done" => true]);
     }
 
 }
