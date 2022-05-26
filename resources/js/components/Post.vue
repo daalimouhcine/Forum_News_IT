@@ -27,6 +27,8 @@ export default {
             isAdmin: localStorage.getItem("userData") && JSON.parse(localStorage.getItem('userData')).role == "admin" ? true : false,
             displayComments: false,
             displayOptions: false,
+            displayEditForm: false,
+            postInfo: {},
         };
     },
     methods: {
@@ -40,13 +42,10 @@ export default {
             let postDisplayOptions = e.target.parentNode;
             postDisplayOptions.classList.toggle("post-display-options");
         },
-        editPost(post_id) {
-            this.$router.push({
-                name: "edit-post",
-                params: {
-                    post_id: post_id,
-                },
-            });
+        editPost(post) {
+            this.displayEditForm = !this.displayEditForm;
+            this.postInfo = post;
+            console.log(this.displayEditForm);
         },
         deletePost(id) {
             console.log(id);
@@ -68,11 +67,13 @@ export default {
     },
     components: {
         Comment,
+        EditPost,
     },
 };
 </script>
 
 <template>
+    <EditPost v-if="displayEditForm" :postInfo="this.postInfo" />
     <article
         class="my-4 break-inside p-6 rounded-xl bg-blue-50 flex flex-col bg-clip-border"
         v-for="post in posts"
@@ -116,8 +117,8 @@ export default {
                         class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
                         name="ellipsis-vertical-outline"
                     ></ion-icon>
-                    <div class="options flex absolute flex-col ">
-                        <button class="m-1 p-2 bg-green-400 rounded-md" @click="editPost(post.id)">
+                    <div class="options flex absolute flex-col">
+                        <button v-if="sameUser(post.user.id)" class="m-1 p-2 bg-green-400 rounded-md" @click="editPost(post)">
                             edit 
                         </button>
                         <button class="m-1 p-2 bg-red-400 rounded-md" @click="deletePost(post.id)">
