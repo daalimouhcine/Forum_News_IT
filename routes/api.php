@@ -16,6 +16,7 @@ Route::post("/deleteUser", [UserController::class, 'deleteUser']);
 Route::post("/addPost", [PostController::class, 'addPost']);
 Route::get("/posts", [PostController::class, 'index']);
 Route::post("/deletePost", [PostController::class, 'deletePost']);
+Route::post("/updatePost", [PostController::class, 'updatePost']);
 
 
 Route::get("/categories", [CategoryController::class, 'index']);
