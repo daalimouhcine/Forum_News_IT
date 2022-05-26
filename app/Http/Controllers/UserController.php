@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
-
+use PharIo\Manifest\RequiresElement;
 
 class UserController extends Controller
 {
@@ -55,97 +55,30 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        
-        $users = User::all();
-        return view('users.index', compact('users'));
-        
+    public function updateProfile(Request $request) {
+        // check if the email is all ready exist
+        $user = User::where('email', $request->email)->first();
+        // return email is all ready exist
+        if(!empty($user) && $user->id != $request->userId) {
+            return response()->json(["error" => "email is all ready exist"]);
+        } 
+
+        $user = User::where('id', $request->userId)->first();
+
+        $user->first_name = trim($request->first_name);
+        $user->last_name = trim($request->last_name);
+        $user->email = trim($request->email);
+        if(!empty($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+        $result = $user->save();
+        return response()->json(["done" => $user]);
     }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-//    function crete 
-    public function create()
-    {
-        //
-        return view('users.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreUserRequest $request)
-    {
-        //
-        $user = User::create($request->validated());
-        return redirect()->route('users.show', $user);
-
-
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-        return view('users.show', compact('user'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-        return view('users.edit', compact('user'));
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateUserRequest  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUserRequest $request, User $user)
-    {
-        //
-        $user->update($request->validated());
-        return redirect()->route('users.show', $user);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
-        $user->delete();
-        return redirect()->route('users.index');
+    public function users() {
+        $users = User::where('role', 'user')->get();
+        return response()->json([$users]);
     }
 
 }
