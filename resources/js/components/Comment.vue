@@ -11,7 +11,7 @@ export default {
             body: "",
             comments: this.comments,
             isAdmin:
-                JSON.parse(localStorage.getItem("userData")).role == "admin"
+                localStorage.getItem("userData") && JSON.parse(localStorage.getItem("userData")).role == "admin"
                     ? true
                     : false,
         };

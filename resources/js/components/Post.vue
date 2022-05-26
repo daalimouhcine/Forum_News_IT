@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             settings: localStorage.getItem('userData') ? true : false,
-            isAdmin: JSON.parse(localStorage.getItem('userData')).role == "admin" ? true : false,
+            isAdmin: localStorage.getItem("userData") && JSON.parse(localStorage.getItem('userData')).role == "admin" ? true : false,
             displayComments: false,
             displayOptions: false,
         };
