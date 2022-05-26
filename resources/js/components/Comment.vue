@@ -32,9 +32,6 @@ export default {
         },
     },
     props: ["postId", "comments"],
-    // mounted() {
-    //     this.getAllComments();
-    // },
 };
 </script>
 
@@ -53,7 +50,7 @@ export default {
                         type="text"
                         placeholder="Add Comment"
                         required
-                    />
+                        />
                     <button
                         type="submit"
                         class="flex absolute right-3 top-2/4 -mt-3 items-center cursor-pointer"
