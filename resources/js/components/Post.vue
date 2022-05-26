@@ -95,7 +95,7 @@ export default {
                                 post.user.first_name + " " + post.user.last_name
                             }}</a
                         >
-                        <span>
+                        <span v-if="post.user.role === 'admin'">
                             <svg
                                 class="fill-blue-500 w-5 h-5"
                                 viewBox="0 0 24 24"
