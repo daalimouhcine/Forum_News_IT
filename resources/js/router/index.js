@@ -5,6 +5,8 @@ import About from '../pages/About';
 import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
+import Profile from '../pages/Profile';
+import AdminDashboard from '../pages/AdminDashboard';
 
 import AddPost from '../components/AddPost';
 import EditPost from '../components/EditPost';
@@ -44,6 +46,16 @@ export const routes = [
         name: 'editpost',
         path: '/posts/edit/:id',
         component: EditPost
+    },
+    {
+        name: 'editprofile',
+        path: '/profile',
+        component: Profile
+    },
+    {
+        name: 'dashboard',
+        path: '/dashboard',
+        component: AdminDashboard
     },
 ];
 
