@@ -5,7 +5,7 @@ export default {};
 <template>
     <div class="grid grid-cols-1 gap-6 mt-4 w-full">
         <div
-            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md"
         >
             <div class="flex items-center mt-5">
                 <div>
@@ -36,7 +36,7 @@ export default {};
         </div>
 
         <div
-            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md"
         >
             <div class="flex items-center mt-5">
                 <div>
@@ -67,7 +67,7 @@ export default {};
         </div>
 
          <div
-            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md"
         >
             <div class="flex items-center mt-5">
                 <div>
@@ -98,7 +98,7 @@ export default {};
         </div>
 
          <div
-            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md rounded-lg"
+            class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md"
         >
             <div class="flex items-center mt-5">
                 <div>
