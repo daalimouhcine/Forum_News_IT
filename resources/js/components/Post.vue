@@ -15,7 +15,7 @@ const postsData = async () => {
 
 export default {
     async setup() {
-        const posts = ref(await postsData())._rawValue.reverse();
+        const posts = ref(await postsData())._rawValue.reverse() || [];
         console.log(posts);
         return {
             posts,
@@ -24,6 +24,7 @@ export default {
     data() {
         return {
             settings: localStorage.getItem('userData') ? true : false,
+            isAdmin: JSON.parse(localStorage.getItem('userData')).role == "admin" ? true : false,
             displayComments: false,
             displayOptions: false,
         };
@@ -110,7 +111,7 @@ export default {
                     </div>
                 </div>
             </div>
-                <div v-if="settings && sameUser(post.user.id)" class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
+                <div v-if="(settings && sameUser(post.user.id)) || isAdmin" class="ml-auto relative cursor-pointer text-black" @click="displayOptionsCondition">
                     <ion-icon
                         class="text-3xl p-1 rounded-md hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
                         name="ellipsis-vertical-outline"
