@@ -22,12 +22,21 @@ class PostController extends Controller
     public function index()
     {
         //
-        Carbon::setLocale('fr');
+        $i = 0;
+        $sum = [];
         $posts = Post::orderBy("id", "asc")->with('user')->with('category')->with('comments')->with('votes')->get();
         foreach ($posts as $post) {
             foreach ($post->comments as $comment) {
                 $comment->setAttribute('user' , User::find($comment->user_id));
             }
+
+            $sum[$i] = 0;
+            foreach($post->votes as $vote) {
+                $sum[$i] += $vote->vote;
+            }
+            $post->sum = $sum[$i];
+
+            $i++;
         }
 
 
