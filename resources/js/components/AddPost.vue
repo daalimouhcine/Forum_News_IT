@@ -10,6 +10,7 @@
                 image: null,
                 category_id: '',
                 categories: [],
+                selectedCategory: '',
             }
         },
         methods: {
@@ -45,15 +46,25 @@
                 });
             }
         },
+        props: ['searchCategory'],
         mounted() {
             this.getCategories();
         },
+        watch: {
+            searchCategory(val) {
+                this.selectedCategory = val;
+            }
+        }
     }
 </script>
 
 
 <template>
-    <div class="flex bg-blue-100 p-3 rounded-md">
+    <div class="flex align-middle justify-center bg-blue-100 p-3 rounded-md">
+        <div class="mx-5 mt-2" v-for="category in categories" :key="category.id">
+            <input type="radio" name="category" v-model="selectedCategory" :value="category.id" @click="searchCategory(selectedCategory)">
+            <label>{{ category.name }}</label>
+        </div>
         <input id="button" type="checkbox" />
         <label for="button" id="label_button" class="ml-auto" @click="clearInputs">
             <ion-icon
