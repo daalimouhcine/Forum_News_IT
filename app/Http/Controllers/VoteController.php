@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Vote;
 use App\Http\Requests\StoreVoteRequest;
 use App\Http\Requests\UpdateVoteRequest;
+use Illuminate\Http\Request;
+
 
 class VoteController extends Controller
 {
@@ -24,11 +26,31 @@ class VoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function addVote()
-    {
-        //
+    public function vote(Request $request) {
+        // check for a vote for this user and post
+        $vote = Vote::where('user_id', $request->user_id)
+            ->where('post_id', $request->post_id)
+            ->first();
         
-        
+        if ($vote) {
+            // check if the same vote is being submitted to delete it
+            if ($vote->vote == $request->vote) {
+                $vote->delete();
+                return response()->json(['message' => 'Vote deleted']);
+            } else {
+                // update the vote
+                $vote->vote = $request->vote;
+                $vote->save();
+                return response()->json(['message' => 'Vote updated']);
+            }
+        } else {
+            // create a new vote
+            $vote = new Vote();
+            $vote->user_id = $request->user_id;
+            $vote->post_id = $request->post_id;
+            $vote->vote = $request->vote;
+            $vote->save();
+        }
     }
 
     /**
