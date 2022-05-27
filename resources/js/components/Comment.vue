@@ -95,7 +95,7 @@ export default {
                             }}</a
                         >
                         <span class="text-slate-500">{{
-                            comment.created_at
+                            comment.created_at.substring(0, 10) + " " + comment.created_at.substring(11, 16)
                         }}</span>
                     </div>
                     <p>
