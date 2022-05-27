@@ -23,6 +23,7 @@ export default {
     },
     data() {
         return {
+            userId: localStorage.getItem("userData") && JSON.parse(localStorage.getItem('userData')).id,
             settings: localStorage.getItem('userData') ? true : false,
             isAdmin: localStorage.getItem("userData") && JSON.parse(localStorage.getItem('userData')).role == "admin" ? true : false,
             displayComments: false,
@@ -64,6 +65,15 @@ export default {
                 return false;
             }
         },
+        voteAction(post_id, vote) {
+            let userData = JSON.parse(localStorage.getItem('userData'));
+            let user_id = userData.id;
+            axios.post("/api/vote", { post_id, vote, user_id })
+            .then(response => {
+                console.log(response);
+                this.$router.go('/');
+            })
+        }
     },
     components: {
         Comment,
@@ -142,13 +152,17 @@ export default {
             <div class="w-full flex flex-row items-center gap-3">
                 <div class="flex flex-row justify-evenly items-center">
                     <ion-icon
+                        @click="voteAction(post.id, 1)"
                         class="text-2xl cursor-pointer p-2 m-0.5 rounded-full hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
+                        :class="{'bg-blue-500': (post.user_id == userId) }"
                         name="chevron-up-outline"
                     ></ion-icon>
                     <p class="text-2xl font-bold font-[Poppins]">{{ vote }}</p>
                     <ion-icon
+                        @click="voteAction(post.id, -1)"
                         class="text-2xl cursor-pointer p-2 m-0.5 rounded-full hover:bg-gray-100 hover:shadow-xl shadow-slate-900 transition-all"
-                        name="chevron-down-outline"
+                        :class="{'bg-blue-500': (post.user_id == userId) && post.vote == -1 }"
+                       name="chevron-down-outline"
                     ></ion-icon>
                 </div>
                 <div
