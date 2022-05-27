@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::post("/register", [UserController::class, 'register']);
@@ -26,3 +27,5 @@ Route::post("/addComment", [CommentController::class, 'addComment']);
 Route::get("/getComments/{postId}", [CommentController::class, 'getComments']);
 Route::post("/deleteComment", [CommentController::class, 'deleteComment']);
 
+
+Route::post("/vote", [VoteController::class, 'vote']);
